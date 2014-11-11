@@ -117,23 +117,23 @@ Canvas {
             ctx.strokeStyle = buffer.paintColor
             ctx.fillStyle = buffer.paintColor
 
-            if (!toolbar.brushShape){
-                ctx.arc(point.x, point.y, toolbar.brushSize, 0, Math.PI*2, true);
-                ctx.closePath();
-                ctx.fill();
-            } else {
-                ctx.fillRect(point.x-toolbar.brushSize,
-                point.y-toolbar.brushSize,
-                toolbar.brushSize*2,
-                toolbar.brushSize*2);
-                ctx.closePath();
-                ctx.fill();
-            }
+            // if (!toolbar.brushShape){
+            //     ctx.arc(point.x, point.y, toolbar.brushSize, 0, Math.PI*2, true);
+            //     ctx.closePath();
+            //     ctx.fill();
+            // } else {
+            //     ctx.fillRect(point.x-toolbar.brushSize,
+            //     point.y-toolbar.brushSize,
+            //     toolbar.brushSize*2,
+            //     toolbar.brushSize*2);
+            //     ctx.closePath();
+            //     ctx.fill();
+            // }
 
             // >>>>>
-            // ctx.drawImage(dab, x, y)
-            // ctx.restore()
-            // buffer.markDirty(x, y, dab.width, dab.height)
+            ctx.drawImage(dab, point.x-toolbar.brushSize, point.y-toolbar.brushSize)
+            ctx.restore()
+            //buffer.markDirty(x, y, dab.width, dab.height)
             buffer.requestPaint()
 
         }

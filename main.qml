@@ -26,7 +26,7 @@ MainView {
 
         ColorPicker {
             id: colorPicker
-            visible: true
+            visible: false
             anchors {
                 left: toolbar.right
             }
@@ -35,31 +35,35 @@ MainView {
         CanvasArea {
         }
 
-        // Canvas {
-        //     id: dab
-        //     visible: false
-        //     antialiasing: true
-        //     smooth: false
-        //     onAvailableChanged: requestPaint()
-        //     onPaint: {
-        //         var ctx = getContext("2d")
-        //         ctx.save()
-        //         ctx.clearRect(0, 0, width, height)
-        //         var originX = width / 2
-        //         var originY = width / 2
-        //         ctx.translate(originX, originY)
-        //         ctx.rotate(brushSettings.angle / 180 * Math.PI)
-        //         ctx.scale(1.0, brushSettings.roundness / 100)
-        //         ctx.translate(-originX, -originY)
-        //         var color = Qt.rgba(colorPicker.color.r, colorPicker.color.g, colorPicker.color.b, brushSettings.flow / 100)
-        //         var gradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width / 2)
-        //         gradient.addColorStop(0, color);
-        //         gradient.addColorStop(brushSettings.hardness / 100, color);
-        //         gradient.addColorStop(1, Qt.rgba(colorPicker.color.r, colorPicker.color.g, colorPicker.color.b, brushSettings.hardness / 100 < 1 ? 0 : brushSettings.flow / 100));
-        //         ctx.ellipse(0, 0, width, width)
-        //         ctx.fillStyle = gradient
-        //         ctx.fill()
-        //         ctx.restore();
-        //     }
+        Component.onCompleted: dab.requestPaint()
+        Canvas {
+            id: dab
+            visible: false
+            antialiasing: true
+            smooth: false
+            onAvailableChanged: requestPaint()
+            width: 80
+            height: 80
+            onPaint: {
+                var ctx = getContext("2d")
+                ctx.save()
+                ctx.clearRect(0, 0, width, height)
+                ctx.strokeStyle = "red"
+                ctx.fillStyle = "red"
+
+
+                console.log(dab.width/2)
+                var originX = width/2
+                var originY = width/2
+                ctx.translate(originX, originY)
+
+                ctx.arc(0, 0, width/2, 0, Math.PI*2, true);
+                ctx.fill();
+
+                ctx.fill()
+                dab.requestPaint()
+                ctx.restore();
+            }
+        }
         } // END Column
     }
