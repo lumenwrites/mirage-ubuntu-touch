@@ -1,0 +1,15 @@
+{
+    "architecture": "all",
+    "description": "description of mirage",
+    "framework": "ubuntu-sdk-14.10-dev2",
+    "hooks": {
+        "mirage": {
+            "apparmor": "mirage.apparmor",
+            "desktop": "mirage.desktop"
+        }
+    },
+    "maintainer": "Ray Alez",
+    "name": "com.ubuntu.developer.rayalez.mirage",
+    "title": "mirage",
+    "version": "0.1"
+}

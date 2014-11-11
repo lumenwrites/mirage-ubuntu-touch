@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=mirage
+Exec=qmlscene $@ main.qml
+Icon=mirage.png
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
+
