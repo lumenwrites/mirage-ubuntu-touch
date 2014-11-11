@@ -27,9 +27,17 @@ Canvas {
         lastX = mouse_area.mouseX
         lastY = mouse_area.mouseY
 
-        ctx.arc(lastX, lastY, toolbar.brushSize, 0, Math.PI*2, true);
-        ctx.closePath();
-        ctx.fill();
+        if (!toolbar.brushShape){
+            ctx.arc(lastX, lastY, toolbar.brushSize, 0, Math.PI*2, true);
+            ctx.fill();
+        } else {
+            ctx.fillRect(mouse_area.mouseX-toolbar.brushSize,
+            mouse_area.mouseY-toolbar.brushSize,
+            toolbar.brushSize*2,
+            toolbar.brushSize*2);
+            ctx.closePath();
+            ctx.fill();
+        }
 
     }
 

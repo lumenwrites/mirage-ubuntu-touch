@@ -8,8 +8,8 @@
             "desktop": "mirage.desktop"
         }
     },
-    "maintainer": "Ray Alez",
+    "maintainer": "Ray Alez <raymestalez@gmail.com>",
     "name": "com.ubuntu.developer.rayalez.mirage",
     "title": "mirage",
-    "version": "0.1"
+    "version": "0.0.1"
 }

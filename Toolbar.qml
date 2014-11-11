@@ -7,6 +7,7 @@ Rectangle {
 
     property alias brushSize : sizeSlider.value
     property real brushOpacity : opacitySlider.value
+    property int brushShape : 0
 
     anchors {
         top: parent.top
@@ -52,6 +53,7 @@ Rectangle {
         VerticalSlider {
             id: opacitySlider
             anchors.horizontalCenter: parent.horizontalCenter
+            defaultValue: 0.5
         }
 
         VerticalSlider {
@@ -61,5 +63,64 @@ Rectangle {
             maxValue: 80
             defaultValue: 30
         }
+
+        Rectangle {
+            id: circularBrush
+            clip: true
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: units.gu(4)
+            height: units.gu(4)
+            color: "transparent"
+
+            Rectangle {
+                id: circularBrushShape
+                anchors.fill: parent
+                color: Qt.lighter("gray")
+                radius: height
+                border.color: "white"
+                border.width: 2
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    circularBrushShape.border.width = 2
+                    circularBrushShape.color = Qt.lighter("gray")
+                    rectangularBrushShape.border.width = 0
+                    rectangularBrushShape.color = "gray"
+                    toolbar.brushShape = 0
+                }
+            }
+        }
+
+        Rectangle {
+            id: rectangularBrush
+            clip: true
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: units.gu(4)
+            height: units.gu(4)
+            color: "transparent"
+
+            Rectangle {
+                id: rectangularBrushShape
+                anchors.fill: parent
+                color: "gray"
+                border.color: "white"
+                border.width: 0
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    circularBrushShape.border.width = 0
+                    circularBrushShape.color = "gray"
+                    rectangularBrushShape.border.width = 2
+                    rectangularBrushShape.color = Qt.lighter("gray")
+                    toolbar.brushShape = 1
+                }
+            }
+        }
+
+
     }
 } // END toolbar
