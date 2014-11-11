@@ -10,7 +10,7 @@ Rectangle {
     z: 10
 
     property color paintColor: ColorUtils.hsba(hueSlider.value, sbPicker.saturation,
-    sbPicker.brightness, toolbar.brush_opacity)
+    sbPicker.brightness, toolbar.brushOpacity)
 
     property real hue: hueSlider.value
     property real saturation: sbPicker.saturation

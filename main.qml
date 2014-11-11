@@ -19,7 +19,9 @@ MainView {
             anchors.horizontalCenter : parent.horizontalCenter
             text: "Hue : " + colorPicker.hue + "<br/>"
             + "Saturation : " + colorPicker.saturation + "<br/>"
-            + "brightness : " + colorPicker.brightness + "<br/>"
+            + "Brightness : " + colorPicker.brightness + "<br/>"
+            + "Opacity : " + toolbar.brushOpacity + "<br/>"
+            + "Size : " + toolbar.brushSize + "<br/>"
         }
 
         ColorPicker {

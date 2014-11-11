@@ -37,7 +37,9 @@ Item {
         Item {
             id: pickerCursor
             property int r : units.gu(1.5)
-            x: 0; y: 0;
+
+            //Default Values. x - saturation, y - brightness
+            x: colorGradient.width; y: colorGradient.height;
             width: units.gu(2); height: units.gu(2);
             Rectangle {
                 x: -parent.r; y: -parent.r

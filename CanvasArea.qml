@@ -18,7 +18,7 @@ Canvas {
     onPaint: {
         // Setup
         var ctx = getContext("2d")
-        ctx.lineWidth = toolbar.brush_size
+        ctx.lineWidth = toolbar.brushSize
         ctx.strokeStyle = canvas.paintColor
         ctx.fillStyle = canvas.paintColor
 
@@ -27,7 +27,7 @@ Canvas {
         lastX = mouse_area.mouseX
         lastY = mouse_area.mouseY
 
-        ctx.arc(lastX, lastY, toolbar.brush_size, 0, Math.PI*2, true);
+        ctx.arc(lastX, lastY, toolbar.brushSize, 0, Math.PI*2, true);
         ctx.closePath();
         ctx.fill();
 
