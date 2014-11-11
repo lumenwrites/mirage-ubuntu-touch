@@ -5,7 +5,7 @@ Canvas {
     id: canvas
     property real lastX
     property real lastY
-    property color paintColor: color_picker.paintColor
+    property color paintColor: colorPicker.paintColor
 
     anchors {
         left: toolbar.right

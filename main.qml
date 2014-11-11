@@ -14,8 +14,17 @@ MainView {
             id: toolbar
         }
 
+        Text {
+            y:40
+            anchors.horizontalCenter : parent.horizontalCenter
+            text: "Hue : " + colorPicker.hue + "<br/>"
+            + "Saturation : " + colorPicker.saturation + "<br/>"
+            + "brightness : " + colorPicker.brightness + "<br/>"
+        }
+
         ColorPicker {
-            id: color_picker
+            id: colorPicker
+            visible: true
             anchors {
                 left: toolbar.right
             }

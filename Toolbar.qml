@@ -23,9 +23,31 @@ Rectangle {
         }
         spacing: units.gu(2)
 
-        ToolbarSmallButton {
-            id: open_color_picker
+
+
+        Rectangle {
+            id: openColorPicker
+            clip: true
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: units.gu(4)
+            height: units.gu(4)
+
+            Checkerboard {}
+
+            Rectangle {
+                anchors.fill: parent
+                color: colorPicker.paintColor
+            }
+
+            MouseArea {
+                id: mousearea
+                anchors.fill: parent
+                onClicked: {
+                    colorPicker.visible = !colorPicker.visible
+                }
+            }
         }
+
 
         Column {
             id: opacity
