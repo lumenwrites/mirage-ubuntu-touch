@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Ubuntu.Components 1.1
+import "utilities.js" as Utilities
 
 Rectangle {
     id: toolbar
@@ -8,6 +9,7 @@ Rectangle {
     property alias brushSize : sizeSlider.value
     property real brushOpacity : opacitySlider.value
     property int brushShape : 0
+    property alias maxBrushSize: sizeSlider.maxValue
 
     anchors {
         top: parent.top
@@ -53,15 +55,17 @@ Rectangle {
         VerticalSlider {
             id: opacitySlider
             anchors.horizontalCenter: parent.horizontalCenter
-            defaultValue: 0.5
+            defaultValue: 1
+            height: units.gu(16)
         }
 
         VerticalSlider {
             id: sizeSlider
             anchors.horizontalCenter: parent.horizontalCenter
-            minValue: 1
-            maxValue: 80
-            defaultValue: 30
+            minValue: units.gu(1)
+            maxValue: units.gu(32)
+            defaultValue: units.gu(4)
+            height: units.gu(16)
         }
 
         Rectangle {
@@ -89,6 +93,7 @@ Rectangle {
                     rectangularBrushShape.border.width = 0
                     rectangularBrushShape.color = "gray"
                     toolbar.brushShape = 0
+                    dab.requestPaint()
                 }
             }
         }
@@ -117,9 +122,51 @@ Rectangle {
                     rectangularBrushShape.border.width = 2
                     rectangularBrushShape.color = Qt.lighter("gray")
                     toolbar.brushShape = 1
+                    dab.requestPaint()
                 }
             }
         }
+
+        ToolbarSmallButton {
+            id: separator
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: 2
+            color: Qt.lighter(UbuntuColors.coolGrey)
+        }
+
+        ToolbarSmallButton {
+            id: clearCanvas
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                canvasArea.mainCanvas.getContext("2d").clearRect(0, 0, canvasArea.mainCanvas.width, canvasArea.mainCanvas.height)
+                canvasArea.mainCanvas.requestPaint()
+            }
+            color: Qt.lighter(UbuntuColors.coolGrey)
+            iconSource: "icons/clear-canvas.png"
+        }
+
+        ToolbarSmallButton {
+            id: savePainting
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                Utilities.saveDrawing()
+            }
+            color: Qt.lighter(UbuntuColors.coolGrey)
+            iconSource: "icons/save-icon.png"
+        }
+
+
+
+        ToolbarSmallButton {
+            id: openDrawer
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                pageStack.push(paintingsView)
+            }
+            color: Qt.lighter(UbuntuColors.coolGrey)
+            iconSource: "icons/drawer-icon.png"
+        }
+
 
 
     }

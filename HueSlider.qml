@@ -50,10 +50,14 @@ Item {
             function handleMouse(mouse) {
                 if (mouse.buttons & Qt.LeftButton) {
                     verticalSlider.y = Math.max(0, Math.min(height-units.gu(2), mouse.y))
+
+                    //Redraw Dab
+                    dab.requestPaint()
                 }
             }
             onPositionChanged: handleMouse(mouse)
             onPressed: handleMouse(mouse)
+
         }
     } // Rectangle.end
 }

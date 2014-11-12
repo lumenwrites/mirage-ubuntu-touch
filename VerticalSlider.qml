@@ -51,6 +51,11 @@ Item {
         function handleMouse(mouse) {
             if (mouse.buttons & Qt.LeftButton) {
                 handle.y = Math.max(0, Math.min(handleArea.height-handle.height, mouse.y))
+
+                //Redraw dab. Need to abstract it into another place.
+                //dab.getContext("2d").clearRect(0,0,dab.width,dab.height)
+                dab.requestPaint()
+
             }
         }
         onPositionChanged: handleMouse(mouse)

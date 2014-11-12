@@ -62,6 +62,9 @@ Item {
                 pickerCursor.y = Math.max(0, Math.min(height, mouse.y));
                 // pickerCursor.x = mouse.x + pickerCursor.width/2
                 // pickerCursor.y = mouse.y + pickerCursor.height/2
+
+                //Redraw Dab
+                dab.requestPaint()
             }
             onPositionChanged: handleMouse(mouse)
             onPressed: handleMouse(mouse)

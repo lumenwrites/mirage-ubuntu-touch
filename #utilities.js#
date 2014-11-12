@@ -1,0 +1,29 @@
+var document
+var date = new Date()
+var docName = Qt.formatDateTime(date, "yyMMddhhmmss");
+var docRequested = null
+// **************** Database and files ****************
+function newDrawing() {
+    print("New Drawing");
+    //undoStack.clear();
+    var date = new Date();
+    docName = Qt.formatDateTime(date, "yyMMddhhmmss");
+    clearRequested = true;
+    canvas.requestPaint();
+    canvas.width = mainView.width;
+    canvas.height = mainView.height;
+}
+
+function saveDrawing() {
+    document = {};
+    document = drawingTemplate;
+    document.docId = docName;
+    document.contents = {"src": paintView.canvasArea.mainCanvas.toDataURL("image/png")};
+}
+
+function undo() {
+    // print("undoing");
+    undoRequested = true;
+    canvas.requestPaint();
+}
+

@@ -5,6 +5,7 @@ Rectangle {
     id: root
 
     property alias text: label.text
+    property alias iconSource: icon.source
     signal clicked
 
     anchors.horizontalCenter: parent.horizontalCenter
@@ -17,6 +18,12 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         color: "white"
+    }
+
+    Image {
+        id: icon
+        anchors.fill: parent
+        anchors.margins: 2
     }
 
     MouseArea {
