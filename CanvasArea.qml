@@ -13,7 +13,8 @@ Item {
         top: parent.top
         bottom: parent.bottom
     }
-
+    //make it whole screen, under toolbar?
+    //anchors.fill:parent
     Canvas {
         id: mainCanvas
         smooth: true
@@ -92,7 +93,9 @@ Item {
                         startPos = Qt.point(point.x, point.y)
                         finalPos = Qt.point(point.x, point.y)
                         lastDrawPoint = point
-                        drawDab(point)
+                        if (toolbar.brushShape != 1) {//if brush is not square
+                            drawDab(point)
+                        }
                         points = []
                         points.push(point)
                     } else {
@@ -131,18 +134,23 @@ Item {
                     var startPoint = lastDrawPoint
 
 
-                    // Rotating the dab
+                    //Rotating the dab
+                    if (toolbar.brushShape == 1) {//if brush is square
+                        spacing = 16
 
-                    // if ( (currentPoint.x > startPoint.x))
-                    // {
-                    //     dab.brushAngle = find_angle(Qt.point(startPoint.x, startPoint.y-10),
-                    //     startPoint, currentPoint)
-                    //     dab.requestPaint()
-                    // } else {
-                    //     dab.brushAngle = - find_angle(Qt.point(startPoint.x, startPoint.y-10),
-                    //     startPoint, currentPoint)
-                    //     dab.requestPaint()
-                    // }
+                        if ( (currentPoint.x > startPoint.x))
+                        {
+                            dab.brushAngle = find_angle(Qt.point(startPoint.x, startPoint.y-10),
+                            startPoint, currentPoint)
+                            dab.requestPaint()
+                        } else {
+                            dab.brushAngle = - find_angle(Qt.point(startPoint.x, startPoint.y-10),
+                            startPoint, currentPoint)
+                            dab.requestPaint()
+                        }
+                    } else {
+                        spacing = 32
+                    }
 
                     // ##
                     var currentSpacing = Math.sqrt(Math.pow(currentPoint.x - startPoint.x, 2) + Math.pow(currentPoint.y - startPoint.y, 2))

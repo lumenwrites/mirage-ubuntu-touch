@@ -12,6 +12,8 @@ Rectangle {
     property alias maxBrushSize: sizeSlider.maxValue
     property alias pickColorButton: pickColor
 
+    //Make it above the canvas?
+    //z: 8
     anchors {
         top: parent.top
         bottom: parent.bottom
@@ -56,8 +58,13 @@ Rectangle {
             id: pickColor
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
-                canvasArea.mouseArea.isColor = true
-                border.width = 2
+                if (canvasArea.mouseArea.isColor ==false){
+                    canvasArea.mouseArea.isColor = true
+                    border.width = 2
+                } else {
+                    canvasArea.mouseArea.isColor = false
+                    border.width = 0
+                }
             }
             color: Qt.lighter(UbuntuColors.coolGrey)
             border.color: "white"
@@ -83,65 +90,43 @@ Rectangle {
             height: units.gu(16)
         }
 
+        Rectangle {
+            id: brushes
+            clip: true
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: units.gu(4)
+            height: units.gu(4)
+            color: "transparent"
 
-        // Rectangle {
-        //     id: circularBrush
-        //     clip: true
-        //     anchors.horizontalCenter: parent.horizontalCenter
-        //     width: units.gu(4)
-        //     height: units.gu(4)
-        //     color: "transparent"
+            Rectangle {
+                id: brushShapeIcon
+                anchors.fill: parent
+                color: Qt.lighter("gray")
+                border.color: "white"
+                border.width: 2
+                radius:height
+                Image {
+                    anchors.fill: parent
+                    anchors.margins: 0
+                    source: "icons/brush.png"
+                }
+            }
 
-        //     Rectangle {
-        //         id: circularBrushShape
-        //         anchors.fill: parent
-        //         color: Qt.lighter("gray")
-        //         radius: height
-        //         border.color: "white"
-        //         border.width: 2
-        //     }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (toolbar.brushShape == 1) {
+                        toolbar.brushShape = 0
+                        brushShapeIcon.radius = brushShapeIcon.height
+                    } else {
+                        toolbar.brushShape = 1
+                        brushShapeIcon.radius = 0
+                    }
 
-        //     MouseArea {
-        //         anchors.fill: parent
-        //         onClicked: {
-        //             circularBrushShape.border.width = 2
-        //             circularBrushShape.color = Qt.lighter("gray")
-        //             rectangularBrushShape.border.width = 0
-        //             rectangularBrushShape.color = "gray"
-        //             toolbar.brushShape = 0
-        //             dab.requestPaint()
-        //         }
-        //     }
-        // }
-
-        // Rectangle {
-        //     id: rectangularBrush
-        //     clip: true
-        //     anchors.horizontalCenter: parent.horizontalCenter
-        //     width: units.gu(4)
-        //     height: units.gu(4)
-        //     color: "transparent"
-
-        //     Rectangle {
-        //         id: rectangularBrushShape
-        //         anchors.fill: parent
-        //         color: "gray"
-        //         border.color: "white"
-        //         border.width: 0
-        //     }
-
-        //     MouseArea {
-        //         anchors.fill: parent
-        //         onClicked: {
-        //             circularBrushShape.border.width = 0
-        //             circularBrushShape.color = "gray"
-        //             rectangularBrushShape.border.width = 2
-        //             rectangularBrushShape.color = Qt.lighter("gray")
-        //             toolbar.brushShape = 1
-        //             dab.requestPaint()
-        //         }
-        //     }
-        // }
+                    dab.requestPaint()
+                }
+            }
+        }
 
         ToolbarSmallButton {
             id: separator
@@ -151,14 +136,17 @@ Rectangle {
         }
 
         ToolbarSmallButton {
-            id: clearCanvas
+            id: fillWithColor
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
-                canvasArea.mainCanvas.getContext("2d").clearRect(0, 0, canvasArea.mainCanvas.width, canvasArea.mainCanvas.height)
+                var ctx = canvasArea.mainCanvas.getContext("2d")
+                ctx.fillStyle = colorPicker.paintColor
+                //clearRect(0, 0, canvasArea.mainCanvas.width, canvasArea.mainCanvas.height)
+                ctx.fillRect(0, 0, canvasArea.mainCanvas.width, canvasArea.mainCanvas.height)
                 canvasArea.mainCanvas.requestPaint()
             }
             color: Qt.lighter(UbuntuColors.coolGrey)
-            iconSource: "icons/clear-canvas.png"
+            iconSource: "icons/fill-with-color.png"
         }
 
         ToolbarSmallButton {
@@ -182,7 +170,6 @@ Rectangle {
             color: Qt.lighter(UbuntuColors.coolGrey)
             iconSource: "icons/drawer-icon.png"
         }
-
 
 
     }

@@ -11,16 +11,20 @@ Page {
     title: "Paintings"
     // Don't use "anchors.fill: parent" on Page
 
-    Rectangle {
+    Item {
         anchors.fill: parent
+        anchors.rightMargin: units.gu(14)
 
         GridView {
             anchors.margins: {
-                right: units.gu(16)
+                right: units.gu(2)
                 left: units.gu(2)
                 bottom: units.gu(2)
                 top: units.gu(2)
             }
+
+            cellHeight: units.gu(12)
+            cellWidth: units.gu(12)
 
             anchors.fill: parent
             model: modelQuery
@@ -88,6 +92,11 @@ Page {
                 // }
             }
         }
+
+
+
+    }
+
         UbuntuShape {
             anchors {
                 right: parent.right
@@ -119,7 +128,4 @@ Page {
                 }
             }
         }
-
-
-    }
 }

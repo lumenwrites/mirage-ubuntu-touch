@@ -20,11 +20,14 @@ Rectangle {
         color: "white"
     }
 
-    Image {
-        id: icon
-        anchors.fill: parent
-        anchors.margins: 2
-    }
+    // OrientationHelper {
+    //     anchors.fill: parent
+        Image {
+            id: icon
+            anchors.fill: parent
+            anchors.margins: 2
+        }
+    //}
 
     MouseArea {
         id: mousearea

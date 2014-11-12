@@ -3,7 +3,7 @@ import Ubuntu.Components 1.1
 
 Page {
     property alias canvasArea: canvasArea
-            property alias toolbar: toolbar
+    property alias toolbar: toolbar
 
         Rectangle {//see if it helps with auto orientation
             color: "transparent"
@@ -12,10 +12,9 @@ Page {
             // height:parent.height-40
             // y: 40
 
-        Toolbar {
-            id: toolbar
-        }
-
+            Toolbar {
+                id: toolbar
+            }
         //test button
         // Button {
         //     x: 500
@@ -91,8 +90,10 @@ Page {
                 } else {
                     ctx.beginPath()
                     ctx.rotate(brushAngle)
-                    ctx.fillRect(-brushWidth/4, -brushWidth/4,
-                    brushWidth/2, brushWidth/2)
+                    // ctx.fillRect(-brushWidth/4, -brushWidth/8,
+                    // brushWidth/2, brushWidth/4)
+                    ctx.roundedRect(-brushWidth/4, -brushWidth/8,
+                    brushWidth/2, brushWidth/4, 2, 2)
                 }
 
                 ctx.fill()
