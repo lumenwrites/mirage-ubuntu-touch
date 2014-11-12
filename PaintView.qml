@@ -2,7 +2,8 @@ import QtQuick 2.0
 import Ubuntu.Components 1.1
 
 Page {
-        property alias canvasArea: canvasArea
+    property alias canvasArea: canvasArea
+            property alias toolbar: toolbar
 
         Rectangle {//see if it helps with auto orientation
             color: "transparent"
@@ -58,7 +59,7 @@ Page {
 
             id: dab
             visible: false
-            antialiasing: true
+            antialiasing: false //true
             smooth: false
             width: toolbar.maxBrushSize
             height: toolbar.maxBrushSize

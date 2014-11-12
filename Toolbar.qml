@@ -10,6 +10,7 @@ Rectangle {
     property real brushOpacity : opacitySlider.value
     property int brushShape : 0
     property alias maxBrushSize: sizeSlider.maxValue
+    property alias pickColorButton: pickColor
 
     anchors {
         top: parent.top
@@ -51,6 +52,20 @@ Rectangle {
             }
         }
 
+        ToolbarSmallButton {
+            id: pickColor
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                canvasArea.mouseArea.isColor = true
+                border.width = 2
+            }
+            color: Qt.lighter(UbuntuColors.coolGrey)
+            border.color: "white"
+            border.width: 0
+            iconSource: "icons/color-picker.png"
+        }
+
+
 
         VerticalSlider {
             id: opacitySlider
@@ -62,70 +77,71 @@ Rectangle {
         VerticalSlider {
             id: sizeSlider
             anchors.horizontalCenter: parent.horizontalCenter
-            minValue: units.gu(1)
+            minValue: units.gu(4)
             maxValue: units.gu(32)
-            defaultValue: units.gu(4)
+            defaultValue: units.gu(8)
             height: units.gu(16)
         }
 
-        Rectangle {
-            id: circularBrush
-            clip: true
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: units.gu(4)
-            height: units.gu(4)
-            color: "transparent"
 
-            Rectangle {
-                id: circularBrushShape
-                anchors.fill: parent
-                color: Qt.lighter("gray")
-                radius: height
-                border.color: "white"
-                border.width: 2
-            }
+        // Rectangle {
+        //     id: circularBrush
+        //     clip: true
+        //     anchors.horizontalCenter: parent.horizontalCenter
+        //     width: units.gu(4)
+        //     height: units.gu(4)
+        //     color: "transparent"
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    circularBrushShape.border.width = 2
-                    circularBrushShape.color = Qt.lighter("gray")
-                    rectangularBrushShape.border.width = 0
-                    rectangularBrushShape.color = "gray"
-                    toolbar.brushShape = 0
-                    dab.requestPaint()
-                }
-            }
-        }
+        //     Rectangle {
+        //         id: circularBrushShape
+        //         anchors.fill: parent
+        //         color: Qt.lighter("gray")
+        //         radius: height
+        //         border.color: "white"
+        //         border.width: 2
+        //     }
 
-        Rectangle {
-            id: rectangularBrush
-            clip: true
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: units.gu(4)
-            height: units.gu(4)
-            color: "transparent"
+        //     MouseArea {
+        //         anchors.fill: parent
+        //         onClicked: {
+        //             circularBrushShape.border.width = 2
+        //             circularBrushShape.color = Qt.lighter("gray")
+        //             rectangularBrushShape.border.width = 0
+        //             rectangularBrushShape.color = "gray"
+        //             toolbar.brushShape = 0
+        //             dab.requestPaint()
+        //         }
+        //     }
+        // }
 
-            Rectangle {
-                id: rectangularBrushShape
-                anchors.fill: parent
-                color: "gray"
-                border.color: "white"
-                border.width: 0
-            }
+        // Rectangle {
+        //     id: rectangularBrush
+        //     clip: true
+        //     anchors.horizontalCenter: parent.horizontalCenter
+        //     width: units.gu(4)
+        //     height: units.gu(4)
+        //     color: "transparent"
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    circularBrushShape.border.width = 0
-                    circularBrushShape.color = "gray"
-                    rectangularBrushShape.border.width = 2
-                    rectangularBrushShape.color = Qt.lighter("gray")
-                    toolbar.brushShape = 1
-                    dab.requestPaint()
-                }
-            }
-        }
+        //     Rectangle {
+        //         id: rectangularBrushShape
+        //         anchors.fill: parent
+        //         color: "gray"
+        //         border.color: "white"
+        //         border.width: 0
+        //     }
+
+        //     MouseArea {
+        //         anchors.fill: parent
+        //         onClicked: {
+        //             circularBrushShape.border.width = 0
+        //             circularBrushShape.color = "gray"
+        //             rectangularBrushShape.border.width = 2
+        //             rectangularBrushShape.color = Qt.lighter("gray")
+        //             toolbar.brushShape = 1
+        //             dab.requestPaint()
+        //         }
+        //     }
+        // }
 
         ToolbarSmallButton {
             id: separator

@@ -1,6 +1,6 @@
-var spacing = 32
+var spacing = 6400000 //32
 
-var deltaDab = Math.max(spacing / 100 * toolbar.brushSize, 1)
+var deltaDab = Math.max(spacing * toolbar.brushSize, 8)
 var points = []
 var lastDrawPoint
 var startPos
@@ -22,6 +22,7 @@ function onPressed(mouseX, mouseY) {
     colorPicker.visible = false
 
 }
+
 
 function onPositionChanged(mouseX, mouseY) {
     var currentPoint = Qt.point(mouseX, mouseY)
@@ -105,8 +106,8 @@ function drawDab(point) {
     var ctx = buffer.getContext("2d")
     ctx.save()
     var size = toolbar.maxBrushSize //toolbar.brushSize
-    var x = point.x - size / 2 + size / 100 * (1 - 2 * Math.random())
-    var y = point.y - size / 2 + size / 100 * (1 - 2 * Math.random())
+    var x = point.x - size / 2 // + size / 100 * (1 - 2 * Math.random())
+    var y = point.y - size / 2 // + size / 100 * (1 - 2 * Math.random())
     if (x < startPos.x) { startPos.x = Math.min(0, x) }
     if (y < startPos.y) { startPos.y = Math.min(0, y) }
     if (x > finalPos.x) { finalPos.x = Math.max(x, buffer.width) }

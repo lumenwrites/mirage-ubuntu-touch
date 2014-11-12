@@ -9,8 +9,13 @@ Rectangle {
     color: Qt.darker(UbuntuColors.coolGrey)
     z: 10
 
-    property color paintColor: ColorUtils.hsba(hueSlider.value, sbPicker.saturation,
-    sbPicker.brightness, 1)//toolbar.brushOpacity for flow
+    property color paintColor: selectedColor
+    property color selectedColor: ColorUtils.hsba(hueSlider.value, sbPicker.saturation,sbPicker.brightness, 1)//toolbar.brushOpacity for flow
+
+    onSelectedColorChanged: {
+        paintColor = selectedColor
+        //can't bind directly because I want to change paintColor by picking color from canvas
+    }
 
     property real hue: hueSlider.value
     property real saturation: sbPicker.saturation
