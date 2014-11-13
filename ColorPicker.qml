@@ -5,7 +5,7 @@ import "ColorUtils.js" as ColorUtils
 Item {
     id: root
     property alias paintColor:  sb.paintColor
-    property alias selectedColor:  sb.selectedColor
+    //property alias selectedColor:  sb.selectedColor //remove it?
     z: 10
 
     Rectangle {
@@ -15,8 +15,21 @@ Item {
         color: Qt.darker(UbuntuColors.coolGrey)
         z: 10
 
+        // Qt.lighter to setup default painting color
         property color paintColor: selectedColor
         property color selectedColor: ColorUtils.hsba(hueSlider.value, sbPicker.saturation,sbPicker.brightness, 1)//toolbar.brushOpacity for flow
+
+        Component.onCompleted: {
+            paintColor = "#FFEBC8" //warm
+            paintColor = "#F9D4A3" //another warm
+            paintColor = "#1C0101" //dark red
+            paintColor = "#BFCCFF" //cold
+            paintColor = "#DEE4FF" //cold
+
+
+
+
+        }
 
         onSelectedColorChanged: {
             paintColor = selectedColor

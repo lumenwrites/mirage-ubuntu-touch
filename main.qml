@@ -5,7 +5,7 @@ import U1db 1.0 as U1db
 MainView {
     objectName: "mainView"
     applicationName: "com.ubuntu.developer.rayalez.mirage"
-    automaticOrientation: false //true
+    automaticOrientation: true
     useDeprecatedToolbar: false
     width: units.gu(100)
     height: units.gu(75)
@@ -13,7 +13,20 @@ MainView {
     PageStack {
         id: pageStack
         anchors.fill:parent
-        Component.onCompleted: push(paintView)
+        Component.onCompleted: {
+            push(paintingsView)
+
+            paintView.canvasArea.mainCanvas.onAvailableChanged.connect(function() {
+                if (paintView.canvasArea.mainCanvas.available){
+                    paintView.canvasArea.newPainting()
+                }
+            });
+
+
+        }
+
+
+
 
         PaintView {
             id: paintView

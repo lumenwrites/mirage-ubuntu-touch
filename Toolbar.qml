@@ -8,7 +8,7 @@ Rectangle {
 
     property alias brushSize : sizeSlider.value
     property real brushOpacity : opacitySlider.value
-    property int brushShape : 0
+    property int brushShape : 1
     property alias maxBrushSize: sizeSlider.maxValue
     property alias pickColorButton: pickColor
 
@@ -45,6 +45,12 @@ Rectangle {
                 color: colorPicker.paintColor
             }
 
+            Image {
+                anchors.fill: parent
+                anchors.margins: 0
+                source: "icons/palette.png"
+            }
+
             MouseArea {
                 id: mousearea
                 anchors.fill: parent
@@ -72,12 +78,18 @@ Rectangle {
             iconSource: "icons/color-picker.png"
         }
 
+        //Separator
+        ToolbarSmallButton {
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: 2
+            color: Qt.lighter(UbuntuColors.coolGrey)
+        }
 
 
         VerticalSlider {
             id: opacitySlider
             anchors.horizontalCenter: parent.horizontalCenter
-            defaultValue: 1
+            defaultValue: 0.4
             height: units.gu(16)
         }
 
@@ -104,7 +116,7 @@ Rectangle {
                 color: Qt.lighter("gray")
                 border.color: "white"
                 border.width: 2
-                radius:height
+                radius: 0 //height
                 Image {
                     anchors.fill: parent
                     anchors.margins: 0
@@ -128,8 +140,8 @@ Rectangle {
             }
         }
 
+        // Separator
         ToolbarSmallButton {
-            id: separator
             anchors.horizontalCenter: parent.horizontalCenter
             height: 2
             color: Qt.lighter(UbuntuColors.coolGrey)
@@ -149,15 +161,16 @@ Rectangle {
             iconSource: "icons/fill-with-color.png"
         }
 
-        ToolbarSmallButton {
+        /* ToolbarSmallButton {
             id: savePainting
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
+			//now this function is in CanvasArea
                 Utilities.saveDrawing()
             }
             color: Qt.lighter(UbuntuColors.coolGrey)
             iconSource: "icons/save-icon.png"
-        }
+        } */
 
 
 

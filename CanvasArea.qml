@@ -6,6 +6,10 @@ Item {
     property alias mainCanvas: mainCanvas
     property alias mouseArea: mouseArea
     property variant docRequested: null
+    property var docName: Qt.formatDateTime(new Date(), "yyMMddhhmmss");
+
+    property var document
+//    property var docName
 
     anchors {
         left: toolbar.right
@@ -15,6 +19,8 @@ Item {
     }
     //make it whole screen, under toolbar?
     //anchors.fill:parent
+
+
     Canvas {
         id: mainCanvas
         smooth: true
@@ -200,23 +206,25 @@ Item {
                     // Grab Buffer image
                     var bufferImage = bufferCtx.getImageData(0, 0, width, height)
 
-                    // Clear the buffer
-                    bufferCtx.clearRect(0, 0, width, height)
-                    buffer.requestPaint()
-
                     /// Redraw the buffer image
-                    canvasCtx.save()
+                    //canvasCtx.save() //do I even need this? what does it do?
+
                     // Stroke opacity!!
                     canvasCtx.globalAlpha = toolbar.brushOpacity
                     canvasCtx.drawImage(bufferImage, 0, 0)
 
-                    canvasCtx.restore()
+                    //canvasCtx.restore()
                     mainCanvas.requestPaint()
+
+                    // Auto save painting
+                    saveDrawing()
+
+                    // Clear the buffer
+                    bufferCtx.clearRect(0, 0, width, height)
+                    buffer.requestPaint()
                 } else {
                     isColor = false
                     paintView.toolbar.pickColorButton.border.width = 0
-
-
                 }
 
 
@@ -270,18 +278,34 @@ Item {
         }
 
         function newPainting() {
-            print("New Drawing");
-            //undoStack.clear();
-            // var date = new Date();
-            // docName = Qt.formatDateTime(date, "yyMMddhhmmss");
-            // clearRequested = true;
-            // canvas.requestPaint();
-            // canvas.width = mainView.width;
-            // canvas.height = mainView.height;
+            var document
+            var date = new Date()
+            docName = Qt.formatDateTime(date, "yyMMddhhmmss");
 
-            mainCanvas.getContext("2d").clearRect(0, 0, canvasArea.mainCanvas.width, canvasArea.mainCanvas.height)
+            // Fill with color on startup
+            var canvasCtx = paintView.canvasArea.mainCanvas.getContext("2d")
+            canvasCtx.globalAlpha = 1
+            canvasCtx.fillStyle = Qt.lighter(UbuntuColors.coolGrey) //"#F9D4A3" //warm
+            canvasCtx.fillRect(0, 0, mainCanvas.width, mainCanvas.height)
+
+            var bufferCtx = buffer.getContext("2d")
+            bufferCtx.fillStyle = Qt.lighter(UbuntuColors.coolGrey) //"#F9D4A3" //warm
+            bufferCtx.fillRect(0, 0, buffer.width, buffer.height)
+
+            buffer.requestPaint()
+
             mainCanvas.requestPaint()
+        }
 
+        function saveDrawing() {
+            // var document
+            // var date = new Date()
+            // var docName = Qt.formatDateTime(date, "yyMMddhhmmss");
+
+            document = {};
+            document = drawingTemplate;
+            document.docId = docName;
+            document.contents = {"src": paintView.canvasArea.mainCanvas.toDataURL("image/png")};
         }
 
         function openDrawing(doc) {

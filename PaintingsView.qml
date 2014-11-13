@@ -14,6 +14,7 @@ Page {
     Item {
         anchors.fill: parent
         anchors.rightMargin: units.gu(14)
+        clip: true
 
         GridView {
             anchors.margins: {
@@ -120,11 +121,13 @@ Page {
                 id: newImage
                 anchors.fill: parent
                 onClicked: {
-                    paintView.canvasArea.newPainting()
                     pageStack.push(paintView);
-                }
-                onPressAndHold: {
-                    PopupUtils.open(itemPopoverComponent, drawingItem);
+
+                    paintView.canvasArea.mainCanvas.onAvailableChanged.connect(function() {
+                        if (paintView.canvasArea.mainCanvas.available){
+                            paintView.canvasArea.newPainting()
+                        }
+                    });
                 }
             }
         }
