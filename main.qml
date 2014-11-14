@@ -14,7 +14,7 @@ MainView {
         id: pageStack
         anchors.fill:parent
         Component.onCompleted: {
-            push(paintingsView)
+            push(paintView)
 
             paintView.canvasArea.mainCanvas.onAvailableChanged.connect(function() {
                 if (paintView.canvasArea.mainCanvas.available){
