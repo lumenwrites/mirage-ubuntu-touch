@@ -20,12 +20,12 @@ Item {
         property color selectedColor: ColorUtils.hsba(hueSlider.value, sbPicker.saturation,sbPicker.brightness, 1)//toolbar.brushOpacity for flow
 
         Component.onCompleted: {
-            paintColor = "#FFEBC8" //warm
-            paintColor = "#F9D4A3" //another warm
-            paintColor = "#1C0101" //dark red
-            paintColor = "#BFCCFF" //cold
-            paintColor = "#DEE4FF" //cold
-
+            // paintColor = "#FFEBC8" //warm
+            // paintColor = "#F9D4A3" //another warm
+            // paintColor = "#1C0101" //dark red
+            // paintColor = "#BFCCFF" //cold
+            // paintColor = "#DEE4FF" //cold
+            paintColor = UbuntuColors.orange
 
 
 

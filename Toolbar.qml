@@ -8,7 +8,7 @@ Rectangle {
 
     property alias brushSize : sizeSlider.value
     property real brushOpacity : opacitySlider.value
-    property int brushShape : 1
+    property int brushShape : 0 //Circular
     property alias maxBrushSize: sizeSlider.maxValue
     property alias pickColorButton: pickColor
 
@@ -89,7 +89,7 @@ Rectangle {
         VerticalSlider {
             id: opacitySlider
             anchors.horizontalCenter: parent.horizontalCenter
-            defaultValue: 0.4
+            defaultValue: 0.8
             height: units.gu(16)
         }
 
@@ -116,7 +116,13 @@ Rectangle {
                 color: Qt.lighter("gray")
                 border.color: "white"
                 border.width: 2
-                radius: 0 //height
+
+                // Rectangular is default
+                //radius: 0 //height
+
+                //Circular is default
+                radius: height
+
                 Image {
                     anchors.fill: parent
                     anchors.margins: 0
@@ -153,7 +159,6 @@ Rectangle {
             onClicked: {
                 var ctx = canvasArea.mainCanvas.getContext("2d")
                 ctx.fillStyle = colorPicker.paintColor
-                //clearRect(0, 0, canvasArea.mainCanvas.width, canvasArea.mainCanvas.height)
                 ctx.fillRect(0, 0, canvasArea.mainCanvas.width, canvasArea.mainCanvas.height)
                 canvasArea.mainCanvas.requestPaint()
             }
