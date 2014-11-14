@@ -8,7 +8,7 @@ Rectangle {
 
     property alias brushSize : sizeSlider.value
     property real brushOpacity : opacitySlider.value
-    property int brushShape : 0 //Circular
+    property int brushShape : 1 //0 -Circular, 1 - rectangular.
     property alias maxBrushSize: sizeSlider.maxValue
     property alias pickColorButton: pickColor
 
@@ -118,10 +118,10 @@ Rectangle {
                 border.width: 2
 
                 // Rectangular is default
-                //radius: 0 //height
+                radius: 0
 
                 //Circular is default
-                radius: height
+                //radius: height
 
                 Image {
                     anchors.fill: parent
@@ -141,7 +141,7 @@ Rectangle {
                         brushShapeIcon.radius = 0
                     }
 
-                    dab.requestPaint()
+                    //dab.requestPaint()
                 }
             }
         }

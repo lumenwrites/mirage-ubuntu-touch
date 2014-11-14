@@ -10,17 +10,17 @@ Page {
     }
 
     // Test Text
-    // Text {
-    //     y:40
-    //     anchors.horizontalCenter : parent.horizontalCenter
-    //     text: "Hue : " + colorPicker.hue + "<br/>"
-    //     + "Saturation : " + colorPicker.saturation + "<br/>"
-    //     + "Brightness : " + colorPicker.brightness + "<br/>"
-    //     + "Opacity : " + toolbar.brushOpacity + "<br/>"
-    //     + "Size : " + toolbar.brushSize + "<br/>"
-    //     + "Dab Width : " + dab.width + "<br/>"
-    //     + "Dab Height : " + dab.height + "<br/>"
-    // }
+    Text {
+        y:40
+        anchors.horizontalCenter : parent.horizontalCenter
+        text: "Hue : " + colorPicker.hue + "<br/>"
+        + "Saturation : " + colorPicker.saturation + "<br/>"
+        + "Brightness : " + colorPicker.brightness + "<br/>"
+        + "Opacity : " + toolbar.brushOpacity + "<br/>"
+        + "Size : " + toolbar.brushSize + "<br/>"
+        + "Dab Width : " + dab.width + "<br/>"
+        + "Dab Height : " + dab.height + "<br/>"
+    }
 
     ColorPicker {
         id: colorPicker

@@ -5,7 +5,7 @@ import U1db 1.0 as U1db
 MainView {
     objectName: "mainView"
     applicationName: "com.ubuntu.developer.rayalez.mirage"
-    automaticOrientation: true
+    automaticOrientation: false //true
     useDeprecatedToolbar: false
     width: units.gu(100)
     height: units.gu(75)
